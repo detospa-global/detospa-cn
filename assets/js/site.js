@@ -60,10 +60,9 @@
 
   /* Scroll reveal: tag groups once, stagger siblings, reveal when they enter the viewport. */
   var groups = [
-    ['.film-card', 0], ['.head > *', .08], ['.about > div > *', .1], ['.about-body > *', .1],
-    ['.scenes .ph', .09], ['.pair', .12], ['.diagram', 0], ['.steps li', .08], ['.feat article', .08],
-    ['.mcol li', .06], ['.mhub', 0], ['.vhead', 0], ['.voices .voice', .08], ['.qa details', .05],
-    ['.specs-img', 0], ['.specs-body > *', .06], ['.caption', 0], ['.fine', 0]
+    ['.head > *', .08], ['.film-head > *', .1], ['.midcta', 0], ['.ch-list li', .1], ['.pair', .12], ['.diagram', 0], ['.steps li', .08],
+    ['.mside', .12], ['.mhub', 0], ['.vhead', 0], ['.voices .voice', .08], ['.sv', .1], ['.qa details', .05],
+    ['.mt li', .08], ['.spec-panel', 0], ['.specs-body > *', .06], ['.contact-in > *', .08], ['.caption', 0], ['.fine', 0]
   ];
   if (hasIO && !reduce) {
     var tagged = [];
@@ -85,7 +84,60 @@
     tagged.forEach(function (el) { io.observe(el); });
     /* photos zoom out as they appear, but only those inside .ph */
     document.querySelectorAll('.ph').forEach(function (el) { if (!el.classList.contains('rv')) { el.classList.add('rv'); io.observe(el); } });
+    /* elements with their own entrance (no fade on the container) */
+    document.querySelectorAll('.bridge, .frow, .contact-unit').forEach(function (el) { io.observe(el); });
   }
+
+  /* Scroll-linked: the film widens to the page edge as it arrives; the step line fills as steps are read. */
+  var grow = document.querySelector('[data-grow]');
+  var steps = document.querySelector('[data-progress]');
+  var stepItems = steps ? steps.querySelectorAll('li') : [];
+  if (!reduce && (grow || steps)) {
+    var ticking = false;
+    var frame = function () {
+      ticking = false;
+      var vh = window.innerHeight;
+      if (grow) {
+        var r = grow.getBoundingClientRect();
+        /* 0 when the top is at the bottom of the screen, 1 once it is ~25% up the screen */
+        var g = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.75)));
+        grow.style.setProperty('--g', g.toFixed(3));
+      }
+      if (steps) {
+        var s = steps.getBoundingClientRect();
+        var line = vh * 0.55;
+        var p = Math.min(1, Math.max(0, (line - s.top - 26) / (s.height - 52)));
+        steps.style.setProperty('--prog', p.toFixed(3));
+        stepItems.forEach(function (li) { li.classList.toggle('on', li.getBoundingClientRect().top + 30 < line); });
+      }
+    };
+    var onScrollFx = function () { if (!ticking) { ticking = true; requestAnimationFrame(frame); } };
+    window.addEventListener('scroll', onScrollFx, { passive: true });
+    window.addEventListener('resize', onScrollFx);
+    frame();
+  } else if (steps) {
+    steps.style.setProperty('--prog', 1);
+    stepItems.forEach(function (li) { li.classList.add('on'); });
+  }
+
+  /* Before / After: one range input per pair moves the divider (mouse, touch and keyboard). */
+  document.querySelectorAll('.cmp').forEach(function (c) {
+    var r = c.querySelector('.cmp-range');
+    if (!r) return;
+    var set = function () { c.style.setProperty('--pos', r.value + '%'); };
+    r.addEventListener('input', set);
+    set();
+    /* pointer: press or drag anywhere on the photo; vertical swipes still scroll the page (touch-action: pan-y) */
+    var down = false;
+    var fromX = function (e) {
+      var b = c.getBoundingClientRect();
+      r.value = Math.round(Math.min(100, Math.max(0, (e.clientX - b.left) / b.width * 100)));
+      set();
+    };
+    c.addEventListener('pointerdown', function (e) { down = true; fromX(e); try { c.setPointerCapture(e.pointerId); } catch (x) {} });
+    c.addEventListener('pointermove', function (e) { if (down) fromX(e); });
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(function (t) { c.addEventListener(t, function () { down = false; }); });
+  });
 
   /* Current section in the desktop nav */
   var navLinks = document.querySelectorAll('.nav a[href^="#"]');
