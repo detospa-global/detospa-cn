@@ -9,7 +9,7 @@
     var closeText = btn.getAttribute('data-close') || 'Close';
     var set = function (open) {
       btn.setAttribute('aria-expanded', String(open));
-      btn.textContent = open ? closeText : openText;
+      btn.setAttribute('aria-label', open ? closeText : openText);
       nav.hidden = !open;
     };
     btn.addEventListener('click', function () { set(nav.hidden); });
