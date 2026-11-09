@@ -16,6 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&amp;family=Noto+Sans+SC:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="../assets/css/site.css">
+<script>document.documentElement.classList.add('js')</script>
 <script src="../assets/js/site.js" defer></script>
 </head>
 <body>
@@ -41,48 +42,62 @@
 
   <section class="hero" aria-labelledby="hero-title">
     <div class="wrap hero-grid">
-      <div class="hero-stage">
-        <div class="spot" aria-hidden="true"></div>
-        <div class="unit">
-          <img src="../assets/img/product.webp" width="789" height="978" alt="H2 ONEST DETOSPA" fetchpriority="high">
-          <span class="pin" style="--x:49%;--y:8%" aria-hidden="true">A</span>
-          <span class="pin" style="--x:60%;--y:12%" aria-hidden="true">B</span>
-        </div>
-        <figure class="inset"><img src="../assets/img/basin-3.webp" width="780" height="780" alt="微纳米气泡出水装置"></figure>
-        <p class="plaque"><span>H2 ONEST DETOSPA</span>专为专业沙龙打造</p>
+      <div class="hero-stage" aria-hidden="true">
+        <div class="spot"></div>
+        <div class="unit hero-unit"><img src="../assets/img/product.webp" width="789" height="978" alt="" fetchpriority="high"></div>
       </div>
       <div class="hero-copy">
-        <p class="label">专业氢护理</p>
-        <h1 id="hero-title">头皮护理的新选择</h1>
-        <p class="lede">DETOSPA 是面向专业美发沙龙的高浓度氢头部护理设备。设备循环利用洗发池中的温水，可用于约10分钟的护理流程。</p>
-        <ul class="pins-key">
-          <li><b>A</b><span>滤网吸水口</span></li>
-          <li><b>B</b><span>微纳米气泡出水装置</span></li>
-        </ul>
-        <div class="btns"><a class="btn btn-light" href="#see">了解 DETOSPA</a><a class="btn btn-ghost" href="#specs">产品参数</a></div>
+        <p class="label h-in" style="--d:.15s">专业氢护理</p>
+        <h1 id="hero-title" class="h-in" style="--d:.3s">头皮护理的新选择</h1>
+        <p class="lede h-in" style="--d:.5s">DETOSPA 是面向专业美发沙龙的高浓度氢头部护理设备。设备循环利用洗发池中的温水，可用于约10分钟的护理流程。</p>
+        <div class="btns h-in" style="--d:.7s">
+          <a class="btn btn-light" href="#film"><span class="btn-play" aria-hidden="true"></span>观看实际护理过程</a>
+          <a class="btn btn-ghost" href="#about">了解 DETOSPA</a>
+        </div>
       </div>
     </div>
-    <div class="facts"><div class="wrap"><ul>
-<li>约10分钟护理</li><li>氢浓度0.6–1ppm（最大）</li><li>无需特别安装施工</li><li>设备重量15kg</li>    </ul></div></div>
+    <p class="plaque wrap"><span>H2 ONEST DETOSPA</span>专为专业沙龙打造</p>
   </section>
 
-  <section class="band" id="about" aria-labelledby="about-title">
-    <div class="wrap about">
-      <div><p class="label">产品介绍</p><h2 class="h2" id="about-title">为沙龙护理增添新体验</h2></div>
-      <div class="about-body"><p class="lead">将氢护理融入现有的头皮与头发护理服务。</p><p>可在染发、烫发、拉直后，或头部SPA、头皮护理及护发护理前，结合现有项目使用。</p></div>
+  <section class="film" id="film" aria-labelledby="film-title">
+    <div class="wrap">
+      <div class="film-card">
+        <div class="film-head">
+          <h2 class="h2" id="film-title">观看实际护理过程</h2>
+          <p class="lede">了解 DETOSPA 在沙龙护理中的实际使用方式。</p>
+        </div>
+        <div class="player" data-player>
+          <video class="pv" data-src="https://storage.googleapis.com/studio-design-asset-files/projects/6kq9ZkGQap/s-1280x720_953bd1e9-4bd4-42ea-98d2-dcea5b433133.mp4" poster="../assets/img/basin-2.webp" muted playsinline loop preload="none" aria-label="观看实际护理过程"></video>
+          <div class="p-ui">
+            <button class="p-btn p-play" type="button" data-label-play="播放视频" data-label-pause="暂停视频" aria-label="播放视频"><span class="ico" aria-hidden="true"></span></button>
+            <div class="p-bar" aria-hidden="true"><span></span></div>
+            <button class="p-btn p-sound" type="button" aria-pressed="false" aria-label="声音开关"><span class="ico" aria-hidden="true"></span></button>
+          </div>
+          <button class="p-big" type="button" aria-label="播放视频" tabindex="-1"><span aria-hidden="true"></span></button>
+        </div>
+        <ul class="facts">
+<li>约10分钟护理</li><li>氢浓度0.6–1ppm（最大）</li><li>无需特别安装施工</li><li>设备重量15kg</li>        </ul>
+      </div>
     </div>
   </section>
 
-  <section class="band tint" id="see" aria-labelledby="see-title">
+  <section class="band" id="see" aria-labelledby="see-title">
     <div class="wrap">
       <div class="head"><h2 class="h2" id="see-title">了解实际护理过程</h2><p class="lede">了解DETOSPA在沙龙中的使用情景：设备使洗发盆内的温水循环。</p></div>
       <div class="scenes">
-        <figure class="s-a"><img src="../assets/img/basin-1.webp" width="1100" height="1467" alt="了解实际护理过程" loading="lazy"></figure>
-        <figure class="s-b"><img src="../assets/img/scene-outlet.webp" width="780" height="780" alt="" loading="lazy"></figure>
-        <figure class="s-c"><img src="../assets/img/basin-4.webp" width="780" height="780" alt="" loading="lazy"></figure>
-        <figure class="s-d"><img src="../assets/img/basin-2.webp" width="1100" height="1467" alt="" loading="lazy"></figure>
+        <figure class="s-a ph"><img src="../assets/img/basin-1.webp" width="1100" height="1467" alt="了解实际护理过程" loading="lazy"></figure>
+        <figure class="s-b ph"><img src="../assets/img/scene-outlet.webp" width="780" height="780" alt="" loading="lazy"></figure>
+        <figure class="s-c ph"><img src="../assets/img/basin-4.webp" width="780" height="780" alt="" loading="lazy"></figure>
+        <figure class="s-d ph"><img src="../assets/img/basin-3.webp" width="780" height="780" alt="" loading="lazy"></figure>
       </div>
       <p class="caption">图片展示实际护理过程。</p>
+    </div>
+  </section>
+
+  <section class="band statement" id="about" aria-labelledby="about-title">
+    <div class="wrap about">
+      <div><p class="label">产品介绍</p><h2 class="h2" id="about-title">为沙龙护理增添新体验</h2></div>
+      <div class="about-body"><p class="lead">将氢护理融入现有的头皮与头发护理服务。</p><p>可在染发、烫发、拉直后，或头部SPA、头皮护理及护发护理前，结合现有项目使用。</p></div>
     </div>
   </section>
 
@@ -180,7 +195,7 @@
     </div>
   </section>
 
-  <section class="band tint" id="voices" aria-labelledby="voices-title">
+  <section class="band dark voices-band" id="voices" aria-labelledby="voices-title">
     <div class="wrap">
       <div class="head"><p class="label">沙龙反馈</p><h2 class="h2" id="voices-title">沙龙使用案例</h2></div>
       <h3 class="vhead">沙龙经营者的反馈</h3>
